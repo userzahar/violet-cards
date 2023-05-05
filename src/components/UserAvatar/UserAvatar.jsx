@@ -4,7 +4,7 @@ export const UserAvatar = ({userAvatar}) => {
     return (
         <div style={{
                 position: "absolute",
-                top:-26,
+                top:-30,
                 right:"50% - 40px",
                 width: 80,
                 height: 80,
