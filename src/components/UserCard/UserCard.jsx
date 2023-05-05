@@ -1,12 +1,11 @@
 
 import backgroundLine from '../../images/Rectangle.png'
-import { FollowButton } from "../FollowButton/FollowButton"
 import { UserCardHeader } from '../UserCardHeader/UserCardHeader'
 import { UserAvatar } from 'components/UserAvatar/UserAvatar'
 
-export const UserCard = ({ userInfo }) => {
+export const UserCard = ({ userInfo, children }) => {
     console.log("🚀 ~ userInfo:", userInfo)
-    const { avatar,followers,tweets, } = userInfo;
+    const { avatar, followers, tweets} = userInfo;
     return <li style={{
         backgroundColor: "#471CA9",
         width: 380,
@@ -30,7 +29,7 @@ export const UserCard = ({ userInfo }) => {
             <UserAvatar userAvatar={avatar} />
             <p>{tweets} TWEETS</p>
             <p>{followers.toLocaleString('en-US')} FOLLOWERS</p>
-            <FollowButton/>
+            {children}
         </div>
     </li>
 }

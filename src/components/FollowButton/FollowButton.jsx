@@ -1,6 +1,6 @@
-export const FollowButton = () => {
+export const FollowButton = ({heandleFollow,idUserBtn}) => {
 
-    return <button style={{
+    return <button onClick={()=>heandleFollow(idUserBtn)} style={{
         width: 196,
         height: 50,
         backgroundColor:"#EBD8FF",
