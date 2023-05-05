@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { UserCard } from "./UserCard/UserCard";
 import { RevolvingDot } from 'react-loader-spinner'
-import { addNumberCurrentUsers,  removeNumberCurrentUser } from "apiOperation.js/apiOperation";
+// import { addNumberCurrentUsers,  removeNumberCurrentUser } from "apiOperation.js/apiOperation";
 import { followingAPI, unFollowAPI } from "apiOperation.js/followingAPI";
 import { FollowButton } from "./FollowButton/FollowButton";
 import { UnfollowButton } from "./UnfollowButton/UnfollowButton";
@@ -46,7 +46,7 @@ export const App = () => {
     };
     fetchData();
   }, []);
-  
+
   return (
     <>
       {loading && <RevolvingDot
