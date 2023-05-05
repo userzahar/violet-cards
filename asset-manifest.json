@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/violet-cards/static/css/main.7acaea2f.css",
-    "main.js": "/violet-cards/static/js/main.07d3183d.js",
+    "main.css": "/violet-cards/static/css/main.e6c13ad2.css",
+    "main.js": "/violet-cards/static/js/main.ae004782.js",
+    "static/media/bg-card.png": "/violet-cards/static/media/bg-card.bdbe4fe5415376ca1916.png",
     "index.html": "/violet-cards/index.html",
-    "main.7acaea2f.css.map": "/violet-cards/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/violet-cards/static/js/main.07d3183d.js.map"
+    "main.e6c13ad2.css.map": "/violet-cards/static/css/main.e6c13ad2.css.map",
+    "main.ae004782.js.map": "/violet-cards/static/js/main.ae004782.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.ae004782.js"
   ]
 }
