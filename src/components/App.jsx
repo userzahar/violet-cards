@@ -6,26 +6,28 @@ export const App = () => {
   const [userData, setUserData] = useState([]);
   useEffect(() => {
     getUsers().then(res => {
-          console.log("🚀💛 ~ res:", res?.data)
-      setUserData(prev => ([...prev, ...res.data]))
+      setUserData([...res.data])
       console.log("add userData",userData)
         }).catch(er=>console.log(er))
-    }, [])
+    },[])
   return (
     <>
-      
         {
         userData.length !== 0 && (
-          <ul>{
+          <ul style={{
+            width: 1200,
+            listStyle:"none",
+            marginLeft: "auto",
+            marginRight:"auto",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}>{
             userData.map((user) => {
-                return (
-                    <li key={user.id}>
-                          <UserCard userInfo={user} />
-                    </li>)
+                return <UserCard key={user.id} userInfo={user} />
             })}
           </ul>)
-        }
-      
+        } 
   </>
   );
 };
