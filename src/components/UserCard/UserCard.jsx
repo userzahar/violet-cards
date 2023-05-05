@@ -4,7 +4,6 @@ import { UserCardHeader } from '../UserCardHeader/UserCardHeader'
 import { UserAvatar } from 'components/UserAvatar/UserAvatar'
 
 export const UserCard = ({ userInfo, children }) => {
-    console.log("🚀 ~ userInfo:", userInfo)
     const { avatar, followers, tweets} = userInfo;
     return <li style={{
         backgroundColor: "#471CA9",

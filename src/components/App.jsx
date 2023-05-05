@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { UserCard } from "./UserCard/UserCard";
 import { RevolvingDot } from 'react-loader-spinner'
-import getUsers from "apiOperation.js/apiOperation";
+import {addNumberCurrentUsers, getUsers, removeNumberCurrentUser} from "apiOperation.js/apiOperation";
 import { FollowButton } from "./FollowButton/FollowButton";
 import { UnfollowButton } from "./UnfollowButton/UnfollowButton";
 
@@ -10,10 +10,16 @@ export const App = () => {
   const [loading, setLoading] = useState(true);
   const [idUser, setIdUser] = useState([]);
   const heandleFollow = (userID) => {
-    setIdUser(prev=>[...prev, userID])
+    const addUserfollowers = userData.find(user=>user.id===userID).followers
+    addNumberCurrentUsers(userID, addUserfollowers)
+      .then(res => { setIdUser(prev => [...prev, userID]) });
+    
   }
   const heandleUnfollow = (userID) => {
-    setIdUser(prev=>prev.filter(value=>value !== userID))
+    const addUserfollowers = userData.find(user=>user.id===userID).followers
+    removeNumberCurrentUser(userID, addUserfollowers)
+      .then(res => { setIdUser(prev => prev.filter(value => value !== userID)) });
+    
   }
   const isMounted = useRef(false);
   useEffect(() => {
@@ -35,7 +41,7 @@ export const App = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [idUser]);
   return (
     <>
       {loading && <RevolvingDot
