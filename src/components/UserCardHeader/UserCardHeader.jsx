@@ -9,6 +9,7 @@ export const UserCardHeader = () => {
             height: 214,
             padding:20,
         }}>
+            
             <img src={logoImage} alt="logo GoIt" />
         </div>)
 }
