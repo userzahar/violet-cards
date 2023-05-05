@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/violet-cards/static/css/main.7acaea2f.css",
+    "main.js": "/violet-cards/static/js/main.07d3183d.js",
+    "index.html": "/violet-cards/index.html",
+    "main.7acaea2f.css.map": "/violet-cards/static/css/main.7acaea2f.css.map",
+    "main.07d3183d.js.map": "/violet-cards/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
