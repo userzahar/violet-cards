@@ -4,5 +4,5 @@ export const UnfollowButton = ({heandleUnfollow,idUserBtn}) => {
         width: 196,
         height: 50,
         backgroundColor:"#fff",
-    }}>UNFOLLOW</button>
+    }}>FOLLOWING</button>
 }
