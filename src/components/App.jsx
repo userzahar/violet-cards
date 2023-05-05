@@ -1,25 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import { UserCard } from "./UserCard/UserCard";
 import { RevolvingDot } from 'react-loader-spinner'
-import {addNumberCurrentUsers, getUsers, removeNumberCurrentUser} from "apiOperation.js/apiOperation";
+import { addNumberCurrentUsers,  removeNumberCurrentUser } from "apiOperation.js/apiOperation";
+import { followingAPI, unFollowAPI } from "apiOperation.js/followingAPI";
 import { FollowButton } from "./FollowButton/FollowButton";
 import { UnfollowButton } from "./UnfollowButton/UnfollowButton";
+import { addUsers } from "apiOperation.js/getUsersAPI";
 
 export const App = () => {
-  const [userData, setUserData] = useState([]);
+  const [users, setUsers]=useState([]);
+  const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(true);
   const [idUser, setIdUser] = useState([]);
+
+  const heandleLoadMore = () => {
+    setPage(prev => prev + 1)
+    addUsers(page).then(users => { setUsers(prev => [...prev, ...users]) })
+  }
   const heandleFollow = (userID) => {
-    const addUserfollowers = userData.find(user=>user.id===userID).followers
-    addNumberCurrentUsers(userID, addUserfollowers)
-      .then(res => { setIdUser(prev => [...prev, userID]) });
-    
+    followingAPI(userID).then(userState => {
+      setIdUser(prev => [...prev, userState.id])
+    });
   }
   const heandleUnfollow = (userID) => {
-    const addUserfollowers = userData.find(user=>user.id===userID).followers
-    removeNumberCurrentUser(userID, addUserfollowers)
-      .then(res => { setIdUser(prev => prev.filter(value => value !== userID)) });
-    
+      unFollowAPI(userID).then(userState=>{setIdUser(prev => prev.filter(value => value !== userID))});
   }
   const isMounted = useRef(false);
   useEffect(() => {
@@ -28,12 +32,12 @@ export const App = () => {
           isMounted.current = false; 
         };
   }, []);
-    useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getUsers();
+        const response = await addUsers(1);
         if (isMounted.current) {
-          setUserData([...response.data]);
+          setUsers([...response]);
           setLoading(false);
         }
       } catch (err) {
@@ -41,7 +45,8 @@ export const App = () => {
       }
     };
     fetchData();
-  }, [idUser]);
+  }, []);
+  
   return (
     <>
       {loading && <RevolvingDot
@@ -56,7 +61,7 @@ export const App = () => {
       visible={true}
     /> }
         {
-        userData.length !== 0 && (
+        users.length !== 0 && (
           <ul style={{
             width: 1200,
             listStyle:"none",
@@ -66,7 +71,7 @@ export const App = () => {
             flexWrap: "wrap",
             justifyContent: "space-between",
           }}>{
-            userData.map((user) => {
+            users.map((user) => {
               return <UserCard key={user.id} userInfo={user}>
                 {idUser.find(id => id === user.id) ? 
                 <UnfollowButton heandleUnfollow={heandleUnfollow} idUserBtn={user.id}/>
@@ -76,7 +81,8 @@ export const App = () => {
               </UserCard>
             })}
           </ul>)
-        } 
+      } 
+      <button type="button" onClick={heandleLoadMore}>LOAD MORE</button>
   </>
   );
 };
