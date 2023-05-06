@@ -2,29 +2,36 @@ import { useEffect, useRef, useState } from "react";
 import { UserCard } from "./UserCard/UserCard";
 import { RevolvingDot } from 'react-loader-spinner'
 // import { addNumberCurrentUsers,  removeNumberCurrentUser } from "apiOperation.js/apiOperation";
-import { followingAPI, unFollowAPI } from "apiOperation.js/followingAPI";
+import { addFollowingID, followingAPI, unFollowAPI } from "apiOperation.js/followingAPI";
 import { FollowButton } from "./FollowButton/FollowButton";
 import { UnfollowButton } from "./UnfollowButton/UnfollowButton";
 import { addUsers } from "apiOperation.js/getUsersAPI";
+import { loadLocal, saveLocal } from "localStorage/localStorage";
 
 export const App = () => {
   const [users, setUsers]=useState([]);
   const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(true);
   const [idUser, setIdUser] = useState([]);
-
+  
   const heandleLoadMore = () => {
+    addFollowingID().then(res => { console.log("💛", res) });
     setPage(prev => prev + 1)
     addUsers(page).then(users => { setUsers(prev => [...prev, ...users]) })
-  }
+    console.log("🚀 ~ idUser:", idUser)
+  };
   const heandleFollow = (userID) => {
     followingAPI(userID).then(userState => {
       setIdUser(prev => [...prev, userState.id])
     });
-  }
+  };
   const heandleUnfollow = (userID) => {
-      unFollowAPI(userID).then(userState=>{setIdUser(prev => prev.filter(value => value !== userID))});
-  }
+    unFollowAPI(userID)
+      .then(userState => {
+        setIdUser(prev => prev.filter(value => value !== userID)
+)});
+  };
+
   const isMounted = useRef(false);
   useEffect(() => {
         isMounted.current = true; 
@@ -32,6 +39,19 @@ export const App = () => {
           isMounted.current = false; 
         };
   }, []);
+
+  useEffect(() => {
+    if (loadLocal()) {setIdUser(loadLocal())}
+    else {setIdUser([])}
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("❗💦",idUser)
+      saveLocal(idUser)
+    }, 200);
+  }, [idUser]);
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,7 +91,7 @@ export const App = () => {
             flexWrap: "wrap",
             justifyContent: "space-between",
           }}>{
-            users.map((user) => {
+              users.map((user) => {
               return <UserCard key={user.id} userInfo={user}>
                 {idUser.find(id => id === user.id) ? 
                 <UnfollowButton heandleUnfollow={heandleUnfollow} idUserBtn={user.id}/>
