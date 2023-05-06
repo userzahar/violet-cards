@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { UserCard } from "./UserCard/UserCard";
 import { RevolvingDot } from 'react-loader-spinner'
 // import { addNumberCurrentUsers,  removeNumberCurrentUser } from "apiOperation.js/apiOperation";
-import { followingAPI, unFollowAPI } from "apiOperation.js/followingAPI";
+// import { followingAPI, unFollowAPI } from "apiOperation.js/followingAPI";
 import { FollowButton } from "./FollowButton/FollowButton";
 import { UnfollowButton } from "./UnfollowButton/UnfollowButton";
 import { addUsers } from "apiOperation.js/getUsersAPI";
@@ -20,10 +20,9 @@ export const App = () => {
     addUsers(page).then(users => { setUsers(prev => [...prev, ...users]) })
   };
   const heandleFollow = (userID) => {
-    followingAPI(userID).then(userState => {
-      setIdUser(prev => [...prev, userState.id])
-    });
-    addNumberCurrentUsers(userID).then( res => {
+
+    addNumberCurrentUsers(userID).then(res => {
+      setIdUser(prev => [...prev, res.id])
       setUsers(prev => {
         const next = prev.map(current => {
           if (current.id === res.id) return res ;
@@ -35,11 +34,8 @@ export const App = () => {
     });
   };
   const heandleUnfollow = (userID) => {
-    unFollowAPI(userID)
-      .then(userState => {
-        setIdUser(prev => prev.filter(value => value !== userID))
-      });
     removeNumberCurrentUser(userID).then(res => {
+      setIdUser(prev => prev.filter(value => value !== userID))
       setUsers(prev => {
         const next = prev.map(current => {
           if (current.id === res.id) return res ;
