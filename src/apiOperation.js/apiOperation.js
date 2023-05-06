@@ -13,7 +13,6 @@ const getUsersByID = async function (id) {
 export const addNumberCurrentUsers = async function (userID) {
   try {
     const follow = await getUsersByID(userID).then(res => {
-      console.log('☢', res.data.followers);
       return res.data.followers;
     });
     const response = await axios.put(`/users/${userID}`, {
@@ -28,7 +27,6 @@ export const addNumberCurrentUsers = async function (userID) {
 export const removeNumberCurrentUser = async function (userID) {
   try {
     const follow = await getUsersByID(userID).then(res => {
-      console.log('✔', res.data.followers);
       return res.data.followers;
     });
     const response = await axios.put(`/users/${userID}`, {
