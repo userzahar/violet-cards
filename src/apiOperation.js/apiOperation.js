@@ -1,17 +1,22 @@
 import axios from 'axios';
 axios.defaults.baseURL = 'https://6454e462a74f994b334bd809.mockapi.io';
 
-export const getUsers = async function () {
+const getUsersByID = async function (id) {
   try {
-    const response = await axios.get('/users');
+    const response = await axios.get(`/users/${id}`);
     return response;
   } catch (error) {
     console.error(error);
   }
 };
-export const addNumberCurrentUsers = async function (userId, follow) {
+
+export const addNumberCurrentUsers = async function (userID) {
   try {
-    const response = await axios.put(`/users/${userId}`, {
+    const follow = await getUsersByID(userID).then(res => {
+      console.log('☢', res.data.followers);
+      return res.data.followers;
+    });
+    const response = await axios.put(`/users/${userID}`, {
       followers: follow + 1,
     });
     return response.data;
@@ -20,9 +25,13 @@ export const addNumberCurrentUsers = async function (userId, follow) {
   }
 };
 
-export const removeNumberCurrentUser = async function (userId, follow) {
+export const removeNumberCurrentUser = async function (userID) {
   try {
-    const response = await axios.put(`/users/${userId}`, {
+    const follow = await getUsersByID(userID).then(res => {
+      console.log('✔', res.data.followers);
+      return res.data.followers;
+    });
+    const response = await axios.put(`/users/${userID}`, {
       followers: follow - 1,
     });
     return response.data;

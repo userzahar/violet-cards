@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { UserCard } from "./UserCard/UserCard";
 import { RevolvingDot } from 'react-loader-spinner'
 // import { addNumberCurrentUsers,  removeNumberCurrentUser } from "apiOperation.js/apiOperation";
-import { addFollowingID, followingAPI, unFollowAPI } from "apiOperation.js/followingAPI";
+import { followingAPI, unFollowAPI } from "apiOperation.js/followingAPI";
 import { FollowButton } from "./FollowButton/FollowButton";
 import { UnfollowButton } from "./UnfollowButton/UnfollowButton";
 import { addUsers } from "apiOperation.js/getUsersAPI";
 import { loadLocal, saveLocal } from "localStorage/localStorage";
+import { addNumberCurrentUsers, removeNumberCurrentUser } from "apiOperation.js/apiOperation";
 
 export const App = () => {
   const [users, setUsers]=useState([]);
@@ -15,21 +16,39 @@ export const App = () => {
   const [idUser, setIdUser] = useState([]);
   
   const heandleLoadMore = () => {
-    addFollowingID().then(res => { console.log("💛", res) });
     setPage(prev => prev + 1)
     addUsers(page).then(users => { setUsers(prev => [...prev, ...users]) })
-    console.log("🚀 ~ idUser:", idUser)
   };
   const heandleFollow = (userID) => {
     followingAPI(userID).then(userState => {
       setIdUser(prev => [...prev, userState.id])
     });
+    addNumberCurrentUsers(userID).then( res => {
+      setUsers(prev => {
+        const next = prev.map(current => {
+          if (current.id === res.id) return res ;
+          return current
+        })
+        console.log("🚀 ~ next:", next)
+        return [...next]
+      })
+    });
   };
   const heandleUnfollow = (userID) => {
     unFollowAPI(userID)
       .then(userState => {
-        setIdUser(prev => prev.filter(value => value !== userID)
-)});
+        setIdUser(prev => prev.filter(value => value !== userID))
+      });
+    removeNumberCurrentUser(userID).then(res => {
+      setUsers(prev => {
+        const next = prev.map(current => {
+          if (current.id === res.id) return res ;
+          return current
+        })
+        console.log("🚀 ~ next:", next)
+        return [...next]
+      })
+    });
   };
 
   const isMounted = useRef(false);
@@ -47,7 +66,7 @@ export const App = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log("❗💦",idUser)
+            
       saveLocal(idUser)
     }, 200);
   }, [idUser]);
@@ -66,7 +85,7 @@ export const App = () => {
     };
     fetchData();
   }, []);
-
+console.log(users)
   return (
     <>
       {loading && <RevolvingDot

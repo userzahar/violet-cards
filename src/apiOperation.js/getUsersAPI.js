@@ -13,7 +13,6 @@ export const addUsers = page => {
       }
     })
     .then(response => {
-      console.log('🚀🍡 ~ response:', response);
       return response;
     })
     .catch(error => {

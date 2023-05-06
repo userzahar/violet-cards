@@ -1,5 +1,4 @@
 export const saveLocal = value => {
-  console.log('🚀 ~ value:', value);
   try {
     const serializedState = JSON.stringify(value);
     localStorage.setItem('following', serializedState);
