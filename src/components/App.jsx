@@ -7,19 +7,17 @@ const Tweets = lazy(() => import('pages/Tweets/Tweets'));
 
 export const App = () => {
   return (
-    <>
       <main>
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
           <Route path="/">
                 <Route index element={<Homepage />} />
                 <Route path="*" element={<Homepage />} />
-                <Route path="tweets" element={<Tweets />} />
+                <Route path="/tweets" element={<Tweets />} />
           </Route>
       </Routes>   
     </Suspense>
     </main>
-    </>
   );
 };
 

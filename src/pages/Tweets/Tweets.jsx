@@ -29,7 +29,6 @@ import { LinkStyled } from "./Tweens.styled";
           if (current.id === res.id) return res ;
           return current
         })
-        console.log("🚀 ~ next:", next)
         return [...next]
       })
     });
@@ -43,7 +42,6 @@ import { LinkStyled } from "./Tweens.styled";
           if (current.id === res.id) return res ;
           return current
         })
-        console.log("🚀 ~ next:", next)
         return [...next]
       })
     });
