@@ -8,6 +8,8 @@ import { UserCard } from "components/UserCard/UserCard";
 import { loadLocal, saveLocal } from "localStorage/localStorage";
 import { useEffect, useRef, useState } from "react";
 import { RevolvingDot } from "react-loader-spinner";
+import { NavLink } from "react-router-dom";
+import { LinkStyled } from "./Tweens.styled";
 
 export const Tweets = () => {
   const [users, setUsers]=useState([]);
@@ -84,6 +86,7 @@ export const Tweets = () => {
   }, []);
   return (
     <ContainerStyled>
+      <LinkStyled to='/'>Go back</LinkStyled>
       {loading && <RevolvingDot
       height="1000"
       width="1000"
