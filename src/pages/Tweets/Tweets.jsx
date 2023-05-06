@@ -85,7 +85,7 @@ export const Tweets = () => {
   }, []);
   return (
     <ContainerStyled>
-      <LinkStyled to='/'>Go back</LinkStyled>
+      <LinkStyled to='/' end>Go back</LinkStyled>
       {loading && <RevolvingDot
       height="1000"
       width="1000"

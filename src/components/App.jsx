@@ -1,5 +1,5 @@
 
-import { RoutesComponent } from "./RoutesComponent/RoutesComponent";
+import { RoutesComponent } from "Routes/RoutesComponent";
 
 export const App = () => {
   return (
