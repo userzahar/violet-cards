@@ -2,7 +2,7 @@ import { RevolvingDot } from "react-loader-spinner";
 import { HomeTitle, HomepageContainer,SpinerDiv } from "./Homepage.styled";
 import { LinkStyled } from "pages/Tweets/Tweens.styled";
 
-export const Homepage = () => <HomepageContainer>
+const Homepage = () => <HomepageContainer>
   <LinkStyled to="/tweets">Tweets</LinkStyled>
   <HomeTitle>WELCOME TO THE VIOLET CARDS</HomeTitle>
   <SpinerDiv><RevolvingDot
@@ -17,3 +17,4 @@ export const Homepage = () => <HomepageContainer>
       visible={true}
     /></SpinerDiv>
 </HomepageContainer>;
+export default Homepage
