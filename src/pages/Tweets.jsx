@@ -5,7 +5,8 @@ import { FollowButton } from "components/FollowButton/FollowButton";
 import { LoadMoreButton } from "components/LoadMoreButton/LoadMoreButton";
 import { UnfollowButton } from "components/UnfollowButton/UnfollowButton";
 import { UserCard } from "components/UserCard/UserCard";
-import { useState } from "react";
+import { loadLocal, saveLocal } from "localStorage/localStorage";
+import { useEffect, useRef, useState } from "react";
 import { RevolvingDot } from "react-loader-spinner";
 
 export const Tweets = () => {

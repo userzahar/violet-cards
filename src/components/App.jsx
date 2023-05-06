@@ -10,6 +10,8 @@ import { loadLocal, saveLocal } from "localStorage/localStorage";
 import { addNumberCurrentUsers, removeNumberCurrentUser } from "apiOperation.js/apiOperation";
 import { ContainerStyled, GalleryContainerStyled } from "./App.styled";
 import { LoadMoreButton } from "./LoadMoreButton/LoadMoreButton";
+import { NavLink, Routes,Route } from "react-router-dom";
+import { Tweets } from "pages/Tweets";
 
 export const App = () => {
   const [users, setUsers]=useState([]);
@@ -85,8 +87,18 @@ export const App = () => {
     fetchData();
   }, []);
 console.log(users)
-  return (
+  return (<>
+    <div>
+      <nav>
+  <NavLink to="/tweets">Home</NavLink>
+      </nav>
+      <Routes>
+        <Route path="/tweets" element={<Tweets />} />
+      </Routes>
+      
+  </div>
     <ContainerStyled>
+
       {loading && <RevolvingDot
       height="1000"
       width="1000"
@@ -113,7 +125,8 @@ console.log(users)
           </GalleryContainerStyled>)
       } 
       <LoadMoreButton type="button" heandleButton={heandleLoadMore}>LOAD MORE</LoadMoreButton>
-  </ContainerStyled>
+    </ContainerStyled>
+    </>
   );
 };
 
