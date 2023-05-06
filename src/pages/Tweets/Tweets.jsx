@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { RevolvingDot } from "react-loader-spinner";
 import { LinkStyled } from "./Tweens.styled";
 
-export const Tweets = () => {
+ const Tweets = () => {
   const [users, setUsers]=useState([]);
   const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(true);
@@ -116,3 +116,4 @@ export const Tweets = () => {
   );
 };
 
+export default Tweets
