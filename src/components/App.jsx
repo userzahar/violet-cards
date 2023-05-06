@@ -8,6 +8,8 @@ import { UnfollowButton } from "./UnfollowButton/UnfollowButton";
 import { addUsers } from "apiOperation.js/getUsersAPI";
 import { loadLocal, saveLocal } from "localStorage/localStorage";
 import { addNumberCurrentUsers, removeNumberCurrentUser } from "apiOperation.js/apiOperation";
+import { ContainerStyled, GalleryContainerStyled } from "./App.styled";
+import { LoadMoreButton } from "./LoadMoreButton/LoadMoreButton";
 
 export const App = () => {
   const [users, setUsers]=useState([]);
@@ -33,6 +35,7 @@ export const App = () => {
       })
     });
   };
+  
   const heandleUnfollow = (userID) => {
     removeNumberCurrentUser(userID).then(res => {
       setIdUser(prev => prev.filter(value => value !== userID))
@@ -83,7 +86,7 @@ export const App = () => {
   }, []);
 console.log(users)
   return (
-    <>
+    <ContainerStyled>
       {loading && <RevolvingDot
       height="1000"
       width="1000"
@@ -97,15 +100,7 @@ console.log(users)
     /> }
         {
         users.length !== 0 && (
-          <ul style={{
-            width: 1200,
-            listStyle:"none",
-            marginLeft: "auto",
-            marginRight:"auto",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}>{
+          <GalleryContainerStyled>{
               users.map((user) => {
               return <UserCard key={user.id} userInfo={user}>
                 {idUser.find(id => id === user.id) ? 
@@ -115,9 +110,10 @@ console.log(users)
                 }
               </UserCard>
             })}
-          </ul>)
+          </GalleryContainerStyled>)
       } 
-      <button type="button" onClick={heandleLoadMore}>LOAD MORE</button>
-  </>
+      <LoadMoreButton type="button" heandleButton={heandleLoadMore}>LOAD MORE</LoadMoreButton>
+  </ContainerStyled>
   );
 };
+

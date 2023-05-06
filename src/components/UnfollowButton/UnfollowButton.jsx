@@ -1,7 +1,6 @@
+import { UnfollowButtonStyled } from "./UnfollowButton.styled"
+
 export const UnfollowButton = ({heandleUnfollow,idUserBtn}) => {
-    return <button onClick={()=>heandleUnfollow(idUserBtn)} style={{
-        width: 196,
-        height: 50,
-        backgroundColor:"#fff",
-    }}>FOLLOWING</button>
+    return <UnfollowButtonStyled
+        onClick={() => heandleUnfollow(idUserBtn)}>FOLLOWING</UnfollowButtonStyled>
 }

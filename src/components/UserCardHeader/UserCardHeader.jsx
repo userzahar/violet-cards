@@ -1,15 +1,8 @@
 import logoImage from "../../images/Logo.png"
-import backgroundImg from '../../images/bg-card.png'
+import { UserCardHeaderStyled } from "./UserCardHeader.styled"
 export const UserCardHeader = () => {
     return (
-        <div style={{
-            backgroundImage: `url(${backgroundImg})`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: '36px 28px',
-            height: 214,
-            padding:20,
-        }}>
-            
+        <UserCardHeaderStyled>
             <img src={logoImage} alt="logo GoIt" />
-        </div>)
+        </UserCardHeaderStyled>)
 }
