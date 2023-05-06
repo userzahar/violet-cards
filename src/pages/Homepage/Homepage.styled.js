@@ -9,3 +9,6 @@ export const HomepageContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+export const SpinerDiv = styled.div`
+  margin-top: 12%;
+`;
