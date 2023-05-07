@@ -24,10 +24,7 @@ export const App = () => {
           </Routes>
       </Suspense>
     </main> 
-  </div>
-
-
-        
+  </div>        
   );
 };
 
